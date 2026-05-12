@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fun things to do in France</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#f4ecd8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f4ecd8"/>
+    <g fill="none" stroke="#2a2622" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="600" y1="180" x2="600" y2="240"/>
+      <path d="M560 240 L 640 240 L 640 340 L 560 340 Z"/>
+      <path d="M530 340 L 670 340 L 685 500 L 515 500 Z"/>
+      <path d="M515 500 L 450 700 L 750 700 L 685 500"/>
+      <path d="M515 500 Q 600 620 685 500"/>
+    </g>
+    <text x="600" y="770" font-family="Caveat, cursive" font-size="60" font-weight="700" fill="#c44536" text-anchor="middle">France</text>
+  </svg>
+</template>
+<style>
+  :root {
+    --paper: #f4ecd8;
+    --paper-dark: #e6dcc2;
+    --ink: #2a2622;
+    --pencil-red: #c44536;
+    --pencil-blue: #3a6b8a;
+    --pencil-yellow: #e8b94a;
+    --pencil-green: #6b8e4e;
+    --pencil-purple: #8a6ba8;
+    --pencil-orange: #d97742;
+    --pencil-pink: #d49a9a;
+    --pencil-teal: #6ba8a0;
+    --pencil-brown: #8b6b4a;
+    --type-title: 96px;
+    --type-subtitle: 38px;
+    --type-card-label: 42px;
+    --type-card-sub: 24px;
+    --pad-x: 90px;
+    --pad-top: 70px;
+    --pad-bottom: 110px;
+  }
+
+  body {
+    margin: 0;
+    background: #1a1612;
+    font-family: 'Kalam', sans-serif;
+  }
+
+  deck-stage {
+    background: #1a1612;
+  }
+
+  section {
+    background:
+      radial-gradient(ellipse 1400px 900px at 30% 20%, #faf2dc 0%, transparent 50%),
+      radial-gradient(ellipse 1200px 800px at 80% 90%, #ede2c8 0%, transparent 60%),
+      linear-gradient(135deg, #f4ecd8 0%, #ebe0c4 100%);
+    font-family: 'Kalam', sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Paper texture using SVG noise */
+  section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.18  0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  /* Subtle paper fibers */
+  section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='f'><feTurbulence type='turbulence' baseFrequency='0.015' numOctaves='3'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.4  0 0 0 0 0.25  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .page {
+    position: absolute;
+    inset: 0;
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: var(--type-title);
+    line-height: 0.95;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    transform: rotate(-1.2deg);
+  }
+
+  h1 .accent {
+    color: var(--pencil-red);
+    display: inline-block;
+    transform: rotate(2deg);
+  }
+
+  h1 .accent-2 {
+    color: var(--pencil-blue);
+    display: inline-block;
+    transform: rotate(-1deg);
+  }
+
+  .subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: var(--type-subtitle);
+    color: var(--pencil-brown);
+    transform: rotate(1.5deg);
+    margin-bottom: 14px;
+    max-width: 460px;
+    text-align: right;
+    line-height: 1.05;
+  }
+
+  .subtitle .star {
+    color: var(--pencil-yellow);
+    font-size: 0.9em;
+  }
+
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px 48px;
+    padding-top: 0;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 14px 18px 20px;
+    text-align: center;
+  }
+
+  .card:nth-child(1) { transform: rotate(-1.5deg); }
+  .card:nth-child(2) { transform: rotate(1deg); }
+  .card:nth-child(3) { transform: rotate(-0.8deg); }
+  .card:nth-child(4) { transform: rotate(1.4deg); }
+  .card:nth-child(5) { transform: rotate(-1.2deg); }
+  .card:nth-child(6) { transform: rotate(0.8deg); }
+
+  .sketch {
+    width: 380px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sketch svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .label {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: var(--type-card-label);
+    line-height: 1;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+
+  .label .underline {
+    display: inline-block;
+    position: relative;
+  }
+  .label .underline::after {
+    content: '';
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    bottom: -6px;
+    height: 8px;
+    background: no-repeat center/100% 100% url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'><path d='M2 5 Q 15 1, 30 4 T 60 4 T 98 3' stroke='%23c44536' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>");
+  }
+
+  .sub {
+    font-family: 'Kalam', cursive;
+    font-weight: 300;
+    font-size: var(--type-card-sub);
+    color: var(--pencil-brown);
+    margin-top: 6px;
+    line-height: 1.05;
+    font-style: italic;
+  }
+
+  /* Number badge */
+  .num {
+    position: absolute;
+    top: -6px;
+    left: 6px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 32px;
+    color: var(--pencil-red);
+    transform: rotate(-8deg);
+  }
+  .num::before { content: '№ '; color: var(--pencil-brown); font-size: 0.75em; }
+
+  /* Decorative tape */
+  .tape {
+    position: absolute;
+    width: 90px;
+    height: 24px;
+    background: rgba(232, 185, 74, 0.35);
+    border: 1px dashed rgba(139, 107, 74, 0.3);
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    pointer-events: none;
+  }
+  .card:nth-child(even) .tape {
+    background: rgba(196, 69, 54, 0.18);
+    transform: translateX(-50%) rotate(4deg);
+  }
+
+  /* Doodles in margins */
+  .doodle {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .doodle-heart {
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    font-family: 'Caveat', cursive;
+    font-size: 34px;
+    color: var(--pencil-red);
+  }
+
+  .signature {
+    position: absolute;
+    bottom: 50px;
+    right: 90px;
+    font-family: 'Caveat', cursive;
+    font-size: 36px;
+    color: var(--pencil-brown);
+    transform: rotate(-3deg);
+    opacity: 0.75;
+  }
+
+  .stamp {
+    position: absolute;
+    bottom: 22px;
+    left: 70px;
+    width: 150px;
+    height: 150px;
+    border: 2.5px dashed var(--pencil-red);
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-6deg);
+    font-family: 'Caveat', cursive;
+    color: var(--pencil-red);
+    opacity: 0.85;
+    z-index: 3;
+  }
+  .stamp .fr { font-size: 56px; font-weight: 700; line-height: 1; }
+  .stamp .par { font-size: 26px; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; line-height: 1; }
+  .stamp .avion { font-size: 28px; margin-top: 10px; font-style: italic; line-height: 1; }
+
+  /* Pencil-sketch SVG filter on illustrations */
+  .pencil-strokes {
+    filter: url(#pencilTexture);
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080" data-om-id="56ee8084:7" style="--deck-rail-w: 188px;">
+
+  <!-- Global SVG defs for pencil texture filter -->
+  
+
+  <section data-label="01 Fun in France" data-om-id="56ee8084:15" data-screen-label="02 01 Fun in France" data-om-validate="no_overflowing_text,no_overlapping_text,slide_sized_text" data-deck-slide="1" data-deck-last-visible="">
+    <div class="page" data-om-id="56ee8084:16">
+
+      <div class="header" data-om-id="56ee8084:17">
+        <h1 data-om-id="56ee8084:18">Fun things to do <br data-om-id="56ee8084:19">in <span class="accent" data-om-id="56ee8084:20">France</span> <span class="accent-2" data-om-id="56ee8084:21">!</span></h1>
+        <div class="subtitle" data-om-id="56ee8084:22">a little postcard<br data-om-id="56ee8084:23">of joys <span class="star" data-om-id="56ee8084:24">✻</span> &amp; treats</div>
+      </div>
+
+      <div class="grid" data-om-id="56ee8084:25">
+
+        <!-- 1. Eiffel Tower -->
+        <div class="card" data-om-id="56ee8084:26">
+          <div class="tape" data-om-id="56ee8084:27"></div>
+          <div class="num" data-om-id="56ee8084:28">1</div>
+          <div class="sketch" data-om-id="56ee8084:29">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:30">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:31">
+                <!-- sky doodles -->
+                <path d="M40 50 q10 -6 20 0 q10 6 20 0" stroke="#3a6b8a" stroke-width="2" opacity="0.5" data-om-id="56ee8084:32"></path>
+                <path d="M300 35 q10 -6 20 0 q10 6 20 0" stroke="#3a6b8a" stroke-width="2" opacity="0.5" data-om-id="56ee8084:33"></path>
+                <circle cx="320" cy="70" r="22" stroke="#e8b94a" stroke-width="3" fill="#f6d97a" fill-opacity="0.5" data-om-id="56ee8084:34"></circle>
+                <g stroke="#e8b94a" stroke-width="2.5" opacity="0.8" data-om-id="56ee8084:35">
+                  <line x1="320" y1="38" x2="320" y2="44" data-om-id="56ee8084:36"></line>
+                  <line x1="320" y1="96" x2="320" y2="102" data-om-id="56ee8084:37"></line>
+                  <line x1="288" y1="70" x2="294" y2="70" data-om-id="56ee8084:38"></line>
+                  <line x1="346" y1="70" x2="352" y2="70" data-om-id="56ee8084:39"></line>
+                  <line x1="298" y1="48" x2="302" y2="52" data-om-id="56ee8084:40"></line>
+                  <line x1="338" y1="88" x2="342" y2="92" data-om-id="56ee8084:41"></line>
+                </g>
+                <!-- tower main -->
+                <g stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:42">
+                  <!-- top spire -->
+                  <line x1="190" y1="30" x2="190" y2="55" data-om-id="56ee8084:43"></line>
+                  <circle cx="190" cy="28" r="2.5" fill="#2a2622" data-om-id="56ee8084:44"></circle>
+                  <!-- top section -->
+                  <path d="M180 55 L 200 55 L 200 90 L 180 90 Z" data-om-id="56ee8084:45"></path>
+                  <line x1="180" y1="70" x2="200" y2="70" data-om-id="56ee8084:46"></line>
+                  <!-- middle -->
+                  <path d="M170 90 L 210 90 L 215 145 L 165 145 Z" data-om-id="56ee8084:47"></path>
+                  <line x1="168" y1="120" x2="212" y2="120" data-om-id="56ee8084:48"></line>
+                  <line x1="166" y1="135" x2="214" y2="135" data-om-id="56ee8084:49"></line>
+                  <!-- arch -->
+                  <path d="M165 145 L 145 240 L 235 240 L 215 145" data-om-id="56ee8084:50"></path>
+                  <path d="M165 145 Q 190 195 215 145" data-om-id="56ee8084:51"></path>
+                  <!-- legs cross hatching -->
+                  <path d="M150 220 L 165 175 M 155 200 L 175 175 M 230 220 L 215 175 M 225 200 L 205 175" opacity="0.7" data-om-id="56ee8084:52"></path>
+                  <!-- ground -->
+                  <path d="M70 245 Q 190 252 320 245" stroke-width="2.5" data-om-id="56ee8084:53"></path>
+                  <path d="M80 252 Q 190 258 310 252" opacity="0.6" stroke-width="1.5" data-om-id="56ee8084:54"></path>
+                </g>
+                <!-- little hill -->
+                <path d="M50 245 q 20 -18 50 0" stroke="#6b8e4e" stroke-width="2" fill="#a8c47a" fill-opacity="0.4" data-om-id="56ee8084:55"></path>
+                <path d="M270 245 q 30 -22 70 0" stroke="#6b8e4e" stroke-width="2" fill="#a8c47a" fill-opacity="0.4" data-om-id="56ee8084:56"></path>
+                <!-- tiny bird -->
+                <path d="M90 80 q5 -6 10 0 q5 -6 10 0" stroke="#2a2622" stroke-width="2" data-om-id="56ee8084:57"></path>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:58"><span class="underline" data-om-id="56ee8084:59">Climb the Eiffel Tower</span></div>
+          <div class="sub" data-om-id="56ee8084:60">— at golden hour, naturellement</div>
+        </div>
+
+        <!-- 2. Croissant + café -->
+        <div class="card" data-om-id="56ee8084:61">
+          <div class="tape" data-om-id="56ee8084:62"></div>
+          <div class="num" data-om-id="56ee8084:63">2</div>
+          <div class="sketch" data-om-id="56ee8084:64">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:65">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:66">
+                <!-- table line -->
+                <path d="M30 230 Q 190 240 350 230" stroke="#8b6b4a" stroke-width="2.5" data-om-id="56ee8084:67"></path>
+                <path d="M40 240 Q 190 248 340 240" stroke="#8b6b4a" stroke-width="1.5" opacity="0.5" data-om-id="56ee8084:68"></path>
+
+                <!-- saucer -->
+                <ellipse cx="115" cy="215" rx="78" ry="14" stroke="#2a2622" stroke-width="2.5" fill="#f0e4cc" data-om-id="56ee8084:69"></ellipse>
+                <ellipse cx="115" cy="210" rx="65" ry="10" stroke="#2a2622" stroke-width="1.5" opacity="0.5" data-om-id="56ee8084:70"></ellipse>
+                <!-- cup -->
+                <path d="M75 200 Q 75 150 115 145 Q 155 150 155 200 Z" stroke="#2a2622" stroke-width="2.5" fill="#fff9ec" data-om-id="56ee8084:71"></path>
+                <ellipse cx="115" cy="152" rx="38" ry="9" stroke="#2a2622" stroke-width="2" fill="#6b4a32" data-om-id="56ee8084:72"></ellipse>
+                <!-- coffee foam swirl -->
+                <path d="M100 152 q 8 -4 15 0 q 8 4 15 0" stroke="#d4b896" stroke-width="1.8" data-om-id="56ee8084:73"></path>
+                <!-- handle -->
+                <path d="M155 165 q 22 0 22 18 q 0 14 -22 14" stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:74"></path>
+                <!-- steam -->
+                <g stroke="#3a6b8a" stroke-width="2" opacity="0.55" data-om-id="56ee8084:75">
+                  <path d="M100 135 q -4 -10 4 -18 q 4 -8 -2 -16" data-om-id="56ee8084:76"></path>
+                  <path d="M115 130 q 4 -10 -4 -18 q -4 -8 2 -16" data-om-id="56ee8084:77"></path>
+                  <path d="M130 135 q -4 -10 4 -18 q 4 -8 -2 -16" data-om-id="56ee8084:78"></path>
+                </g>
+
+                <!-- croissant -->
+                <g data-om-id="56ee8084:79">
+                  <path d="M225 180 Q 220 130 270 120 Q 320 110 340 145 Q 350 175 320 195 Q 290 215 260 210 Q 230 205 225 180 Z" stroke="#8b6b4a" stroke-width="2.5" fill="#e8b94a" fill-opacity="0.7" data-om-id="56ee8084:80"></path>
+                  <!-- scoring lines -->
+                  <path d="M240 170 Q 260 155 275 155" stroke="#8b6b4a" stroke-width="2" data-om-id="56ee8084:81"></path>
+                  <path d="M255 185 Q 275 165 295 165" stroke="#8b6b4a" stroke-width="2" data-om-id="56ee8084:82"></path>
+                  <path d="M275 195 Q 295 180 315 178" stroke="#8b6b4a" stroke-width="2" data-om-id="56ee8084:83"></path>
+                  <path d="M295 195 Q 315 188 325 178" stroke="#8b6b4a" stroke-width="2" data-om-id="56ee8084:84"></path>
+                  <!-- flake highlights -->
+                  <path d="M265 145 q 6 -2 10 2" stroke="#d4a043" stroke-width="1.5" data-om-id="56ee8084:85"></path>
+                  <path d="M295 140 q 6 -2 10 2" stroke="#d4a043" stroke-width="1.5" data-om-id="56ee8084:86"></path>
+                </g>
+                <!-- crumbs -->
+                <g fill="#8b6b4a" stroke="none" data-om-id="56ee8084:87">
+                  <circle cx="210" cy="225" r="2" data-om-id="56ee8084:88"></circle>
+                  <circle cx="220" cy="232" r="1.5" data-om-id="56ee8084:89"></circle>
+                  <circle cx="250" cy="230" r="2" data-om-id="56ee8084:90"></circle>
+                  <circle cx="335" cy="225" r="1.5" data-om-id="56ee8084:91"></circle>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:92"><span class="underline" data-om-id="56ee8084:93">Linger at a café</span></div>
+          <div class="sub" data-om-id="56ee8084:94">croissant, espresso, no rush</div>
+        </div>
+
+        <!-- 3. Lavender fields -->
+        <div class="card" data-om-id="56ee8084:95">
+          <div class="tape" data-om-id="56ee8084:96"></div>
+          <div class="num" data-om-id="56ee8084:97">3</div>
+          <div class="sketch" data-om-id="56ee8084:98">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:99">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:100">
+                <!-- sun -->
+                <circle cx="80" cy="70" r="20" stroke="#e8b94a" stroke-width="2.5" fill="#f6d97a" fill-opacity="0.6" data-om-id="56ee8084:101"></circle>
+                <!-- clouds -->
+                <path d="M250 55 q 10 -10 25 -5 q 5 -10 22 -5 q 15 0 12 12 q -2 8 -15 6 q -8 8 -22 2 q -15 2 -22 -10" stroke="#8a98a8" stroke-width="2" fill="#fff" fill-opacity="0.5" data-om-id="56ee8084:102"></path>
+                <!-- distant hills -->
+                <path d="M0 165 Q 100 140 200 155 Q 290 165 380 145" stroke="#6b8e4e" stroke-width="2" fill="#9ab87a" fill-opacity="0.35" data-om-id="56ee8084:103"></path>
+                <!-- cypress trees -->
+                <g stroke="#3d5a3d" stroke-width="2" fill="#5a7a4a" fill-opacity="0.7" data-om-id="56ee8084:104">
+                  <path d="M120 165 Q 115 130 122 110 Q 130 130 128 165 Z" data-om-id="56ee8084:105"></path>
+                  <path d="M155 167 Q 152 140 158 125 Q 165 140 163 167 Z" data-om-id="56ee8084:106"></path>
+                </g>
+                <!-- lavender rows (curved stripes) -->
+                <g data-om-id="56ee8084:107">
+                  <path d="M-20 200 Q 190 180 400 200" stroke="#8a6ba8" stroke-width="14" stroke-opacity="0.6" data-om-id="56ee8084:108"></path>
+                  <path d="M-20 200 Q 190 180 400 200" stroke="#a888c2" stroke-width="6" stroke-opacity="0.5" data-om-id="56ee8084:109"></path>
+                  <path d="M-20 220 Q 190 200 400 220" stroke="#7a5d96" stroke-width="14" stroke-opacity="0.65" data-om-id="56ee8084:110"></path>
+                  <path d="M-20 220 Q 190 200 400 220" stroke="#a888c2" stroke-width="6" stroke-opacity="0.5" data-om-id="56ee8084:111"></path>
+                  <path d="M-20 243 Q 190 226 400 243" stroke="#6e5485" stroke-width="16" stroke-opacity="0.7" data-om-id="56ee8084:112"></path>
+                  <path d="M-20 243 Q 190 226 400 243" stroke="#9b7bb8" stroke-width="6" stroke-opacity="0.5" data-om-id="56ee8084:113"></path>
+                  <path d="M-20 268 Q 190 254 400 268" stroke="#5e4775" stroke-width="18" stroke-opacity="0.75" data-om-id="56ee8084:114"></path>
+                  <path d="M-20 268 Q 190 254 400 268" stroke="#8a6ba8" stroke-width="6" stroke-opacity="0.5" data-om-id="56ee8084:115"></path>
+                </g>
+                <!-- tiny flower stalks dots -->
+                <g fill="#5e4775" stroke="none" opacity="0.7" data-om-id="56ee8084:116">
+                  <circle cx="50" cy="195" r="2" data-om-id="56ee8084:117"></circle>
+                  <circle cx="120" cy="195" r="2" data-om-id="56ee8084:118"></circle>
+                  <circle cx="200" cy="190" r="2" data-om-id="56ee8084:119"></circle>
+                  <circle cx="280" cy="195" r="2" data-om-id="56ee8084:120"></circle>
+                  <circle cx="340" cy="195" r="2" data-om-id="56ee8084:121"></circle>
+                </g>
+                <!-- bee -->
+                <g transform="translate(220 100)" data-om-id="56ee8084:122">
+                  <ellipse cx="0" cy="0" rx="9" ry="6" fill="#e8b94a" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:123"></ellipse>
+                  <line x1="-3" y1="-5" x2="-3" y2="5" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:124"></line>
+                  <line x1="3" y1="-5" x2="3" y2="5" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:125"></line>
+                  <ellipse cx="-3" cy="-8" rx="5" ry="3" fill="#fff" fill-opacity="0.6" stroke="#2a2622" stroke-width="1" data-om-id="56ee8084:126"></ellipse>
+                  <ellipse cx="4" cy="-8" rx="5" ry="3" fill="#fff" fill-opacity="0.6" stroke="#2a2622" stroke-width="1" data-om-id="56ee8084:127"></ellipse>
+                </g>
+                <path d="M200 90 q 10 10 25 10 q 15 0 25 -15" stroke="#2a2622" stroke-width="1.2" stroke-dasharray="2 4" opacity="0.5" data-om-id="56ee8084:128"></path>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:129"><span class="underline" data-om-id="56ee8084:130">Walk lavender fields</span></div>
+          <div class="sub" data-om-id="56ee8084:131">Provence in early July</div>
+        </div>
+
+        <!-- 4. Wine -->
+        <div class="card" data-om-id="56ee8084:132">
+          <div class="tape" data-om-id="56ee8084:133"></div>
+          <div class="num" data-om-id="56ee8084:134">4</div>
+          <div class="sketch" data-om-id="56ee8084:135">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:136">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:137">
+                <!-- table -->
+                <path d="M30 245 Q 190 252 350 245" stroke="#8b6b4a" stroke-width="2.5" data-om-id="56ee8084:138"></path>
+
+                <!-- bottle -->
+                <g data-om-id="56ee8084:139">
+                  <path d="M120 55 L 140 55 L 140 100 Q 152 110 152 135 L 152 235 Q 152 245 142 245 L 118 245 Q 108 245 108 235 L 108 135 Q 108 110 120 100 Z" stroke="#2a2622" stroke-width="2.5" fill="#3d2a3a" fill-opacity="0.85" data-om-id="56ee8084:140"></path>
+                  <!-- cork/cap -->
+                  <rect x="118" y="50" width="24" height="12" stroke="#2a2622" stroke-width="2" fill="#6b4a32" data-om-id="56ee8084:141"></rect>
+                  <!-- label -->
+                  <rect x="108" y="160" width="44" height="60" stroke="#2a2622" stroke-width="2" fill="#f4ecd8" data-om-id="56ee8084:142"></rect>
+                  <line x1="115" y1="175" x2="145" y2="175" stroke="#c44536" stroke-width="2" data-om-id="56ee8084:143"></line>
+                  <line x1="118" y1="188" x2="142" y2="188" stroke="#2a2622" stroke-width="1.2" opacity="0.6" data-om-id="56ee8084:144"></line>
+                  <line x1="120" y1="196" x2="140" y2="196" stroke="#2a2622" stroke-width="1.2" opacity="0.6" data-om-id="56ee8084:145"></line>
+                  <line x1="118" y1="208" x2="142" y2="208" stroke="#2a2622" stroke-width="1.2" opacity="0.6" data-om-id="56ee8084:146"></line>
+                  <!-- highlight -->
+                  <path d="M114 130 L 114 220" stroke="#f4ecd8" stroke-width="2" opacity="0.3" data-om-id="56ee8084:147"></path>
+                </g>
+
+                <!-- wine glass -->
+                <g data-om-id="56ee8084:148">
+                  <!-- bowl -->
+                  <path d="M195 110 Q 195 175 245 180 Q 295 175 295 110 Z" stroke="#2a2622" stroke-width="2.5" fill="#c44536" fill-opacity="0.55" data-om-id="56ee8084:149"></path>
+                  <!-- wine surface ellipse -->
+                  <path d="M205 140 Q 245 150 285 140" stroke="#2a2622" stroke-width="1.5" opacity="0.6" data-om-id="56ee8084:150"></path>
+                  <!-- rim highlight -->
+                  <path d="M198 112 Q 245 122 292 112" stroke="#2a2622" stroke-width="2" data-om-id="56ee8084:151"></path>
+                  <!-- stem -->
+                  <line x1="245" y1="180" x2="245" y2="225" stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:152"></line>
+                  <!-- base -->
+                  <ellipse cx="245" cy="228" rx="30" ry="6" stroke="#2a2622" stroke-width="2.5" fill="#f0e4cc" data-om-id="56ee8084:153"></ellipse>
+                  <!-- glass highlight -->
+                  <path d="M210 125 Q 215 145 220 165" stroke="#fff" stroke-width="2" opacity="0.45" data-om-id="56ee8084:154"></path>
+                </g>
+
+                <!-- grapes -->
+                <g transform="translate(310 195)" data-om-id="56ee8084:155">
+                  <g fill="#8a6ba8" stroke="#5e4775" stroke-width="1.5" data-om-id="56ee8084:156">
+                    <circle cx="0" cy="0" r="7" data-om-id="56ee8084:157"></circle>
+                    <circle cx="-10" cy="2" r="7" data-om-id="56ee8084:158"></circle>
+                    <circle cx="10" cy="2" r="7" data-om-id="56ee8084:159"></circle>
+                    <circle cx="-5" cy="12" r="7" data-om-id="56ee8084:160"></circle>
+                    <circle cx="5" cy="12" r="7" data-om-id="56ee8084:161"></circle>
+                    <circle cx="0" cy="22" r="7" data-om-id="56ee8084:162"></circle>
+                  </g>
+                  <path d="M0 -7 q 5 -10 12 -8" stroke="#6b8e4e" stroke-width="2" fill="none" data-om-id="56ee8084:163"></path>
+                  <path d="M12 -15 q 10 -2 12 5 q -8 4 -12 -5 Z" stroke="#6b8e4e" stroke-width="1.5" fill="#9ab87a" fill-opacity="0.7" data-om-id="56ee8084:164"></path>
+                </g>
+
+                <!-- hearts above wine -->
+                <text x="220" y="90" font-family="Caveat" font-size="24" fill="#c44536" transform="rotate(-12 220 90)" data-om-id="56ee8084:165">♥</text>
+                <text x="260" y="80" font-family="Caveat" font-size="18" fill="#c44536" transform="rotate(8 260 80)" data-om-id="56ee8084:166">♥</text>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:167"><span class="underline" data-om-id="56ee8084:168">Sip a Bordeaux</span></div>
+          <div class="sub" data-om-id="56ee8084:169">vineyards &amp; long lunches</div>
+        </div>
+
+        <!-- 5. Côte d'Azur beach -->
+        <div class="card" data-om-id="56ee8084:170">
+          <div class="tape" data-om-id="56ee8084:171"></div>
+          <div class="num" data-om-id="56ee8084:172">5</div>
+          <div class="sketch" data-om-id="56ee8084:173">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:174">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:175">
+                <!-- sky -->
+                <path d="M0 0 L 380 0 L 380 130 L 0 130 Z" fill="#bcd9e8" fill-opacity="0.4" stroke="none" data-om-id="56ee8084:176"></path>
+                <!-- sun -->
+                <circle cx="310" cy="55" r="22" stroke="#d97742" stroke-width="2.5" fill="#f6b97a" fill-opacity="0.6" data-om-id="56ee8084:177"></circle>
+                <!-- horizon clouds -->
+                <path d="M30 70 q 15 -8 30 -2 q 8 -8 22 -3 q 12 4 5 12 q -12 5 -25 0 q -15 5 -32 -7" stroke="#8a98a8" stroke-width="2" fill="#fff" fill-opacity="0.6" data-om-id="56ee8084:178"></path>
+
+                <!-- sea -->
+                <path d="M0 130 L 380 130 L 380 200 L 0 200 Z" fill="#6ba8a0" fill-opacity="0.55" stroke="none" data-om-id="56ee8084:179"></path>
+                <path d="M0 130 Q 100 128 200 132 Q 290 134 380 130" stroke="#3a6b8a" stroke-width="2" data-om-id="56ee8084:180"></path>
+                <g stroke="#3a6b8a" stroke-width="1.5" opacity="0.6" data-om-id="56ee8084:181">
+                  <path d="M20 150 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:182"></path>
+                  <path d="M120 155 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:183"></path>
+                  <path d="M220 150 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:184"></path>
+                  <path d="M300 158 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:185"></path>
+                  <path d="M60 170 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:186"></path>
+                  <path d="M180 175 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:187"></path>
+                  <path d="M280 172 q 12 -4 25 0 q 12 4 25 0" data-om-id="56ee8084:188"></path>
+                </g>
+
+                <!-- sand -->
+                <path d="M0 200 L 380 200 L 380 280 L 0 280 Z" fill="#e8d4a8" fill-opacity="0.55" stroke="none" data-om-id="56ee8084:189"></path>
+                <path d="M0 200 Q 90 205 190 200 Q 280 196 380 202" stroke="#8b6b4a" stroke-width="1.5" opacity="0.6" data-om-id="56ee8084:190"></path>
+
+                <!-- umbrella -->
+                <g data-om-id="56ee8084:191">
+                  <line x1="120" y1="155" x2="120" y2="245" stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:192"></line>
+                  <path d="M55 160 Q 120 130 185 160 L 175 168 Q 120 148 65 168 Z" stroke="#2a2622" stroke-width="2.5" fill="#c44536" fill-opacity="0.85" data-om-id="56ee8084:193"></path>
+                  <!-- panels -->
+                  <line x1="120" y1="130" x2="75" y2="162" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:194"></line>
+                  <line x1="120" y1="130" x2="120" y2="162" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:195"></line>
+                  <line x1="120" y1="130" x2="165" y2="162" stroke="#2a2622" stroke-width="1.5" data-om-id="56ee8084:196"></line>
+                  <line x1="120" y1="130" x2="95" y2="162" stroke="#2a2622" stroke-width="1.5" opacity="0.5" data-om-id="56ee8084:197"></line>
+                  <line x1="120" y1="130" x2="145" y2="162" stroke="#2a2622" stroke-width="1.5" opacity="0.5" data-om-id="56ee8084:198"></line>
+                  <!-- topper -->
+                  <circle cx="120" cy="130" r="3" fill="#2a2622" data-om-id="56ee8084:199"></circle>
+                </g>
+
+                <!-- striped towel -->
+                <g transform="translate(200 230) rotate(-6)" data-om-id="56ee8084:200">
+                  <rect x="0" y="0" width="120" height="35" stroke="#2a2622" stroke-width="2" fill="#f4ecd8" data-om-id="56ee8084:201"></rect>
+                  <rect x="0" y="0" width="120" height="7" fill="#c44536" fill-opacity="0.85" data-om-id="56ee8084:202"></rect>
+                  <rect x="0" y="14" width="120" height="7" fill="#3a6b8a" fill-opacity="0.85" data-om-id="56ee8084:203"></rect>
+                  <rect x="0" y="28" width="120" height="7" fill="#c44536" fill-opacity="0.85" data-om-id="56ee8084:204"></rect>
+                </g>
+
+                <!-- seagull -->
+                <path d="M250 75 q 8 -8 15 0 q 7 -8 15 0" stroke="#2a2622" stroke-width="2" fill="none" data-om-id="56ee8084:205"></path>
+                <path d="M70 95 q 6 -6 12 0 q 6 -6 12 0" stroke="#2a2622" stroke-width="1.8" fill="none" data-om-id="56ee8084:206"></path>
+
+                <!-- starfish -->
+                <g transform="translate(330 245)" fill="#d97742" stroke="#8b4a2a" stroke-width="1.2" data-om-id="56ee8084:207">
+                  <path d="M0 -10 L 3 -3 L 10 -3 L 4 2 L 6 9 L 0 5 L -6 9 L -4 2 L -10 -3 L -3 -3 Z" data-om-id="56ee8084:208"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:209"><span class="underline" data-om-id="56ee8084:210">Lounge on the Riviera</span></div>
+          <div class="sub" data-om-id="56ee8084:211">Nice, Cassis, Antibes…</div>
+        </div>
+
+        <!-- 6. Bicycle with baguette -->
+        <div class="card" data-om-id="56ee8084:212">
+          <div class="tape" data-om-id="56ee8084:213"></div>
+          <div class="num" data-om-id="56ee8084:214">6</div>
+          <div class="sketch" data-om-id="56ee8084:215">
+            <svg viewBox="0 0 380 280" data-om-id="56ee8084:216">
+              <g class="pencil-strokes" fill="none" stroke-linecap="round" stroke-linejoin="round" data-om-id="56ee8084:217">
+                <!-- street -->
+                <path d="M10 230 Q 190 238 370 230" stroke="#8b6b4a" stroke-width="2.5" data-om-id="56ee8084:218"></path>
+                <path d="M10 245 Q 190 252 370 245" stroke="#8b6b4a" stroke-width="1.5" opacity="0.5" data-om-id="56ee8084:219"></path>
+                <!-- cobble dots -->
+                <g fill="#8b6b4a" stroke="none" opacity="0.5" data-om-id="56ee8084:220">
+                  <circle cx="50" cy="252" r="2" data-om-id="56ee8084:221"></circle>
+                  <circle cx="90" cy="258" r="2" data-om-id="56ee8084:222"></circle>
+                  <circle cx="160" cy="255" r="2" data-om-id="56ee8084:223"></circle>
+                  <circle cx="240" cy="258" r="2" data-om-id="56ee8084:224"></circle>
+                  <circle cx="310" cy="252" r="2" data-om-id="56ee8084:225"></circle>
+                </g>
+
+                <!-- bicycle -->
+                <g stroke="#2a2622" stroke-width="2.5" fill="none" data-om-id="56ee8084:226">
+                  <!-- wheels -->
+                  <circle cx="100" cy="195" r="38" fill="#f4ecd8" fill-opacity="0.4" data-om-id="56ee8084:227"></circle>
+                  <circle cx="100" cy="195" r="5" fill="#2a2622" data-om-id="56ee8084:228"></circle>
+                  <circle cx="260" cy="195" r="38" fill="#f4ecd8" fill-opacity="0.4" data-om-id="56ee8084:229"></circle>
+                  <circle cx="260" cy="195" r="5" fill="#2a2622" data-om-id="56ee8084:230"></circle>
+                  <!-- spokes -->
+                  <g stroke-width="1.2" opacity="0.6" data-om-id="56ee8084:231">
+                    <line x1="100" y1="158" x2="100" y2="232" data-om-id="56ee8084:232"></line>
+                    <line x1="63" y1="195" x2="137" y2="195" data-om-id="56ee8084:233"></line>
+                    <line x1="74" y1="169" x2="126" y2="221" data-om-id="56ee8084:234"></line>
+                    <line x1="126" y1="169" x2="74" y2="221" data-om-id="56ee8084:235"></line>
+                    <line x1="260" y1="158" x2="260" y2="232" data-om-id="56ee8084:236"></line>
+                    <line x1="223" y1="195" x2="297" y2="195" data-om-id="56ee8084:237"></line>
+                    <line x1="234" y1="169" x2="286" y2="221" data-om-id="56ee8084:238"></line>
+                    <line x1="286" y1="169" x2="234" y2="221" data-om-id="56ee8084:239"></line>
+                  </g>
+                  <!-- frame -->
+                  <path d="M100 195 L 175 195 L 215 130 L 260 195" stroke="#c44536" stroke-width="3.5" data-om-id="56ee8084:240"></path>
+                  <path d="M175 195 L 215 130" stroke="#c44536" stroke-width="3.5" data-om-id="56ee8084:241"></path>
+                  <path d="M215 130 L 250 130" stroke="#c44536" stroke-width="3.5" data-om-id="56ee8084:242"></path>
+                  <path d="M260 195 L 245 125" stroke="#c44536" stroke-width="3.5" data-om-id="56ee8084:243"></path>
+                  <!-- seat -->
+                  <path d="M205 122 q 12 -2 22 0 L 230 128 L 200 128 Z" fill="#2a2622" stroke-width="2" data-om-id="56ee8084:244"></path>
+                  <!-- handlebar post -->
+                  <line x1="250" y1="130" x2="262" y2="105" stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:245"></line>
+                  <line x1="252" y1="108" x2="278" y2="100" stroke="#2a2622" stroke-width="2.5" data-om-id="56ee8084:246"></line>
+                  <!-- pedal -->
+                  <circle cx="175" cy="195" r="6" fill="#2a2622" data-om-id="56ee8084:247"></circle>
+                  <line x1="175" y1="195" x2="190" y2="210" stroke="#2a2622" stroke-width="2" data-om-id="56ee8084:248"></line>
+                  <rect x="186" y="208" width="12" height="5" fill="#2a2622" stroke="none" data-om-id="56ee8084:249"></rect>
+
+                  <!-- basket on front -->
+                  <path d="M255 90 L 295 90 L 290 115 L 260 115 Z" stroke="#8b6b4a" stroke-width="2.5" fill="#d4a86a" fill-opacity="0.5" data-om-id="56ee8084:250"></path>
+                  <line x1="265" y1="92" x2="263" y2="113" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:251"></line>
+                  <line x1="275" y1="92" x2="275" y2="115" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:252"></line>
+                  <line x1="285" y1="92" x2="287" y2="113" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:253"></line>
+                  <line x1="258" y1="100" x2="293" y2="100" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:254"></line>
+
+                  <!-- baguettes in basket -->
+                  <g data-om-id="56ee8084:255">
+                    <path d="M260 50 Q 275 50 282 60 L 295 90 L 280 95 L 255 65 Q 250 55 260 50 Z" stroke="#8b6b4a" stroke-width="2" fill="#e8b94a" fill-opacity="0.85" data-om-id="56ee8084:256"></path>
+                    <line x1="265" y1="60" x2="270" y2="55" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:257"></line>
+                    <line x1="272" y1="65" x2="277" y2="60" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:258"></line>
+                    <line x1="279" y1="72" x2="284" y2="67" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:259"></line>
+                    <line x1="286" y1="80" x2="291" y2="76" stroke="#8b6b4a" stroke-width="1.5" data-om-id="56ee8084:260"></line>
+                  </g>
+
+                  <!-- flowers on basket -->
+                  <g transform="translate(270 88)" data-om-id="56ee8084:261">
+                    <circle r="5" fill="#c44536" stroke="#2a2622" stroke-width="1" data-om-id="56ee8084:262"></circle>
+                    <circle cx="-8" cy="2" r="4" fill="#e8b94a" stroke="#2a2622" stroke-width="1" data-om-id="56ee8084:263"></circle>
+                    <circle cx="8" cy="2" r="4" fill="#d49a9a" stroke="#2a2622" stroke-width="1" data-om-id="56ee8084:264"></circle>
+                  </g>
+                </g>
+
+                <!-- speed lines -->
+                <g stroke="#3a6b8a" stroke-width="2" opacity="0.5" fill="none" data-om-id="56ee8084:265">
+                  <path d="M20 170 L 60 170" data-om-id="56ee8084:266"></path>
+                  <path d="M30 185 L 65 185" data-om-id="56ee8084:267"></path>
+                  <path d="M20 200 L 55 200" data-om-id="56ee8084:268"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="label" data-om-id="56ee8084:269"><span class="underline" data-om-id="56ee8084:270">Cycle with a baguette</span></div>
+          <div class="sub" data-om-id="56ee8084:271">villages of the Loire valley</div>
+        </div>
+
+      </div>
+
+      <div class="stamp" data-om-id="56ee8084:273">
+        <div class="fr" data-om-id="56ee8084:274">FR</div>
+        <div class="par" data-om-id="56ee8084:275">Par avion</div>
+        <div class="avion" data-om-id="56ee8084:276">bon voyage ✈</div>
+      </div>
+
+    </div>
+  </section>
+
+</deck-stage>
+</body>
+</html>
