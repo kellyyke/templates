@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photo Collage Grid</title>
+<style>
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #0d1117;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h1 {
+    font-family: sans-serif;
+    color: #e6edf3;
+    font-size: 48px;
+    margin: 0;
+  }
+  .collage {
+    display: grid;
+    grid-template-columns: 360px 180px 180px;
+    grid-template-rows: 240px 240px;
+    gap: 8px;
+  }
+  .collage > div {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .large {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+</style>
+</head>
+<body>
+<h1>Travel Memories</h1>
+<div class="collage">
+  <!-- Large cell: sunset landscape -->
+  <div class="large">
+    <svg viewBox="0 0 360 488" width="360" height="488" xmlns="http://www.w3.org/2000/svg">
+      <rect width="360" height="488" fill="#1a3a5c"/>
+      <circle cx="180" cy="320" r="60" fill="#f39c12"/>
+      <rect y="340" width="360" height="148" fill="#2c3e50"/>
+      <path d="M0 340 Q90 300 180 340 Q270 380 360 340 L360 488 L0 488Z" fill="#27ae60"/>
+    </svg>
+  </div>
+  <!-- Top-right: mountain -->
+  <div>
+    <svg viewBox="0 0 180 240" width="180" height="240" xmlns="http://www.w3.org/2000/svg">
+      <rect width="180" height="240" fill="#2c3e50"/>
+      <polygon points="90,40 30,200 150,200" fill="#7f8c8d"/>
+      <polygon points="90,40 70,80 110,80" fill="#ecf0f1"/>
+      <rect y="200" width="180" height="40" fill="#27ae60"/>
+    </svg>
+  </div>
+  <!-- Middle-right: ocean -->
+  <div>
+    <svg viewBox="0 0 180 240" width="180" height="240" xmlns="http://www.w3.org/2000/svg">
+      <rect width="180" height="240" fill="#3498db"/>
+      <path d="M0 120 Q45 100 90 120 Q135 140 180 120 L180 240 L0 240Z" fill="#2980b9"/>
+      <circle cx="140" cy="40" r="25" fill="#f1c40f"/>
+    </svg>
+  </div>
+  <!-- Bottom-middle: forest -->
+  <div>
+    <svg viewBox="0 0 180 240" width="180" height="240" xmlns="http://www.w3.org/2000/svg">
+      <rect width="180" height="240" fill="#1a3a2a"/>
+      <polygon points="50,200 70,80 90,200" fill="#27ae60"/>
+      <polygon points="80,200 100,60 120,200" fill="#2ecc71"/>
+      <polygon points="110,200 130,90 150,200" fill="#27ae60"/>
+      <rect y="200" width="180" height="40" fill="#6b4226"/>
+    </svg>
+  </div>
+  <!-- Bottom-right: desert -->
+  <div>
+    <svg viewBox="0 0 180 240" width="180" height="240" xmlns="http://www.w3.org/2000/svg">
+      <rect width="180" height="240" fill="#e67e22"/>
+      <ellipse cx="90" cy="180" rx="80" ry="30" fill="#d35400"/>
+      <ellipse cx="40" cy="200" rx="50" ry="20" fill="#e74c3c"/>
+      <circle cx="140" cy="50" r="30" fill="#f39c12"/>
+    </svg>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sales Dashboard 2024</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0f0f23;
+    --bg-card: #1a1a3e;
+    --bg-surface: #16163a;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --accent-teal: #4ecdc4;
+    --accent-coral: #ff6b6b;
+    --accent-purple: #a29bfe;
+    --accent-gold: #feca57;
+    --accent-green: #00b894;
+    --accent-pink: #fd79a8;
+    --radius: 16px;
+  }
+
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--bg-primary);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    grid-template-rows: auto 1fr;
+    padding: 40px 48px;
+    box-sizing: border-box;
+    gap: 32px;
+  }
+
+  /* Header */
+  .header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo {
+    width: 44px;
+    height: 44px;
+  }
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .header-right {
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: right;
+  }
+
+  /* Main content area */
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* KPI Cards Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+  .kpi-card:nth-child(1)::before { background: var(--accent-teal); }
+  .kpi-card:nth-child(2)::before { background: var(--accent-purple); }
+  .kpi-card:nth-child(3)::before { background: var(--accent-green); }
+  .kpi-card:nth-child(4)::before { background: var(--accent-gold); }
+  .kpi-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .kpi-change {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .kpi-change.up { color: var(--accent-green); }
+  .kpi-change.down { color: var(--accent-coral); }
+  .kpi-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    opacity: 0.3;
+  }
+
+  /* Bar chart section */
+  .chart-panel {
+    background: var(--bg-surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .sidebar-panel {
+    background: var(--bg-surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .donut-legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .donut-legend-item .left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .donut-legend-item .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* Footer */
+  .footer {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #21262d;
+    padding-top: 12px;
+    color: var(--text-secondary);
+    font-size: 12px;
+  }
+
+  /* Decorative divider */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #30363d, transparent);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header with logo and title -->
+<div class="header">
+  <div class="header-left">
+    <svg class="logo" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+      <rect width="44" height="44" rx="10" fill="#4ecdc4" opacity="0.15"/>
+      <path d="M12 22 L20 14 L28 22 L20 30 Z" fill="#4ecdc4"/>
+      <path d="M20 18 L28 10 L36 18 L28 26 Z" fill="#a29bfe" opacity="0.7"/>
+    </svg>
+    <div>
+      <h1>Sales Dashboard 2024</h1>
+      <div class="subtitle">Real-time performance metrics</div>
+    </div>
+  </div>
+  <div class="header-right">
+    Last updated: May 14, 2024<br>
+    <span style="opacity:0.7;">Fiscal Year Q2</span>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+  <!-- KPI Cards (CSS Grid → GRID element) -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <svg class="kpi-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value">$2.4M</div>
+      <div class="kpi-change up">+18.2% vs last quarter</div>
+    </div>
+    <div class="kpi-card">
+      <svg class="kpi-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#a29bfe" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="kpi-label">Active Users</div>
+      <div class="kpi-value">12.5K</div>
+      <div class="kpi-change up">+8.4% vs last quarter</div>
+    </div>
+    <div class="kpi-card">
+      <svg class="kpi-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="17,6 23,6 23,12" stroke="#00b894" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="kpi-label">Growth</div>
+      <div class="kpi-value">+23%</div>
+      <div class="kpi-change up">+5.1% vs last quarter</div>
+    </div>
+    <div class="kpi-card">
+      <svg class="kpi-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="3" width="20" height="14" rx="2" stroke="#feca57" stroke-width="2"/>
+        <path d="M8 21h8M12 17v4" stroke="#feca57" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="kpi-label">Orders</div>
+      <div class="kpi-value">8.7K</div>
+      <div class="kpi-change down">-2.1% vs last quarter</div>
+    </div>
+  </div>
+
+  <!-- Monthly Revenue Bar Chart (→ CHART groupedColumn element) -->
+  <div class="chart-panel">
+    <div class="chart-title">Monthly Revenue by Channel</div>
+    <svg width="100%" height="320" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Y-axis -->
+      <line x1="50" y1="10" x2="50" y2="280" stroke="#30363d" stroke-width="1"/>
+      <!-- X-axis -->
+      <line x1="50" y1="280" x2="880" y2="280" stroke="#30363d" stroke-width="1"/>
+      <!-- Grid lines -->
+      <line x1="50" y1="70" x2="880" y2="70" stroke="#21262d" stroke-width="1" stroke-dasharray="3"/>
+      <line x1="50" y1="140" x2="880" y2="140" stroke="#21262d" stroke-width="1" stroke-dasharray="3"/>
+      <line x1="50" y1="210" x2="880" y2="210" stroke="#21262d" stroke-width="1" stroke-dasharray="3"/>
+      <!-- Y-axis labels -->
+      <text x="40" y="284" text-anchor="end" fill="#8b949e" font-size="11">0</text>
+      <text x="40" y="214" text-anchor="end" fill="#8b949e" font-size="11">100k</text>
+      <text x="40" y="144" text-anchor="end" fill="#8b949e" font-size="11">200k</text>
+      <text x="40" y="74" text-anchor="end" fill="#8b949e" font-size="11">300k</text>
+
+      <!-- Jan: Online=180k, Retail=90k -->
+      <rect x="75" y="154" width="30" height="126" fill="#4ecdc4" rx="3"/>
+      <rect x="108" y="217" width="30" height="63" fill="#a29bfe" rx="3"/>
+      <!-- Feb: Online=210k, Retail=105k -->
+      <rect x="175" y="133" width="30" height="147" fill="#4ecdc4" rx="3"/>
+      <rect x="208" y="207" width="30" height="73" fill="#a29bfe" rx="3"/>
+      <!-- Mar: Online=195k, Retail=115k -->
+      <rect x="275" y="144" width="30" height="136" fill="#4ecdc4" rx="3"/>
+      <rect x="308" y="200" width="30" height="80" fill="#a29bfe" rx="3"/>
+      <!-- Apr: Online=250k, Retail=130k -->
+      <rect x="375" y="105" width="30" height="175" fill="#4ecdc4" rx="3"/>
+      <rect x="408" y="189" width="30" height="91" fill="#a29bfe" rx="3"/>
+      <!-- May: Online=280k, Retail=120k -->
+      <rect x="475" y="84" width="30" height="196" fill="#4ecdc4" rx="3"/>
+      <rect x="508" y="196" width="30" height="84" fill="#a29bfe" rx="3"/>
+      <!-- Jun: Online=310k, Retail=145k -->
+      <rect x="575" y="63" width="30" height="217" fill="#4ecdc4" rx="3"/>
+      <rect x="608" y="179" width="30" height="101" fill="#a29bfe" rx="3"/>
+
+      <!-- X-axis labels -->
+      <text x="106" y="300" text-anchor="middle" fill="#8b949e" font-size="11">Jan</text>
+      <text x="206" y="300" text-anchor="middle" fill="#8b949e" font-size="11">Feb</text>
+      <text x="306" y="300" text-anchor="middle" fill="#8b949e" font-size="11">Mar</text>
+      <text x="406" y="300" text-anchor="middle" fill="#8b949e" font-size="11">Apr</text>
+      <text x="506" y="300" text-anchor="middle" fill="#8b949e" font-size="11">May</text>
+      <text x="606" y="300" text-anchor="middle" fill="#8b949e" font-size="11">Jun</text>
+
+      <!-- Legend -->
+      <rect x="700" y="30" width="12" height="12" fill="#4ecdc4" rx="2"/>
+      <text x="718" y="41" fill="#8b949e" font-size="12">Online</text>
+      <rect x="700" y="52" width="12" height="12" fill="#a29bfe" rx="2"/>
+      <text x="718" y="63" fill="#8b949e" font-size="12">Retail</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <!-- Donut Chart: Category Breakdown (→ CHART donut element) -->
+  <div class="sidebar-panel">
+    <div class="chart-title">Revenue by Category</div>
+    <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Donut using stroke-dasharray (r=70, circumference=439.8) -->
+      <!-- Design: 45% = 197.9 -->
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#4ecdc4" stroke-width="35"
+        stroke-dasharray="197.9 241.9" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+      <!-- Video: 25% = 109.95 -->
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#a29bfe" stroke-width="35"
+        stroke-dasharray="109.95 329.85" stroke-dashoffset="-197.9" transform="rotate(-90 100 100)"/>
+      <!-- Print: 18% = 79.16 -->
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#feca57" stroke-width="35"
+        stroke-dasharray="79.16 360.64" stroke-dashoffset="-307.85" transform="rotate(-90 100 100)"/>
+      <!-- Other: 12% = 52.78 -->
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#ff6b6b" stroke-width="35"
+        stroke-dasharray="52.78 387.02" stroke-dashoffset="-387.01" transform="rotate(-90 100 100)"/>
+      <!-- Inner circle -->
+      <circle cx="100" cy="100" r="52" fill="#16163a"/>
+      <text x="100" y="96" text-anchor="middle" fill="#e6edf3" font-size="20" font-weight="700">$2.4M</text>
+      <text x="100" y="114" text-anchor="middle" fill="#8b949e" font-size="11">Total</text>
+    </svg>
+    <div class="donut-legend">
+      <div class="donut-legend-item"><span class="left"><span class="swatch" style="background:#4ecdc4;"></span>Design</span><span>45%</span></div>
+      <div class="donut-legend-item"><span class="left"><span class="swatch" style="background:#a29bfe;"></span>Video</span><span>25%</span></div>
+      <div class="donut-legend-item"><span class="left"><span class="swatch" style="background:#feca57;"></span>Print</span><span>18%</span></div>
+      <div class="donut-legend-item"><span class="left"><span class="swatch" style="background:#ff6b6b;"></span>Other</span><span>12%</span></div>
+    </div>
+  </div>
+
+  <!-- Mini data table (→ could map to stackedArea) -->
+  <div class="sidebar-panel" style="align-items: stretch;">
+    <div class="chart-title">Weekly Trend</div>
+    <table style="border-collapse: collapse; width: 100%; font-size: 12px;">
+      <thead>
+        <tr>
+          <th style="padding:8px 12px; text-align:left; border-bottom:1px solid #30363d; color:#8b949e; font-weight:500;">Week</th>
+          <th style="padding:8px 12px; text-align:right; border-bottom:1px solid #30363d; color:#8b949e; font-weight:500;">Online</th>
+          <th style="padding:8px 12px; text-align:right; border-bottom:1px solid #30363d; color:#8b949e; font-weight:500;">Retail</th>
+          <th style="padding:8px 12px; text-align:right; border-bottom:1px solid #30363d; color:#8b949e; font-weight:500;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:6px 12px; color:#c9d1d9;">W1</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">42k</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">18k</td><td style="padding:6px 12px; text-align:right; color:#4ecdc4; font-weight:500;">60k</td></tr>
+        <tr><td style="padding:6px 12px; color:#c9d1d9;">W2</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">48k</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">21k</td><td style="padding:6px 12px; text-align:right; color:#4ecdc4; font-weight:500;">69k</td></tr>
+        <tr><td style="padding:6px 12px; color:#c9d1d9;">W3</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">55k</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">24k</td><td style="padding:6px 12px; text-align:right; color:#4ecdc4; font-weight:500;">79k</td></tr>
+        <tr><td style="padding:6px 12px; color:#c9d1d9;">W4</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">61k</td><td style="padding:6px 12px; text-align:right; color:#c9d1d9;">27k</td><td style="padding:6px 12px; text-align:right; color:#4ecdc4; font-weight:500;">88k</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
