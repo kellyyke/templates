@@ -1,0 +1,298 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#B89A6A;--gold-light:#D4B896;--cream:#F8F4EF;--charcoal:#1C1C1C;--mid:#5A5651;--accent:#8C7355}
+.pres{font-family:'Jost',sans-serif;background:#0A0A0A;width:100%;color:var(--cream)}
+.slides-wrapper{position:relative;width:100%;aspect-ratio:16/9;max-height:520px;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.6s ease}
+.slide.active{opacity:1;pointer-events:all}
+.slide-label{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;flex-shrink:0}
+
+/* SLIDE 1 — COVER */
+.s1{background:#050505;align-items:center;justify-content:center;text-align:center;padding:0;overflow:hidden}
+.s1-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35}
+.s1-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.eyebrow{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.s1 h1{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:var(--cream);line-height:1;letter-spacing:12px;text-transform:uppercase}
+.tagline{font-size:13px;letter-spacing:3px;color:var(--gold-light);margin-top:14px;font-weight:300}
+.gold-line{width:50px;height:1px;background:var(--gold);margin:20px auto}
+.caption{font-size:10px;letter-spacing:2px;color:#555;text-transform:uppercase}
+
+/* SLIDE 2 — MARKET + LINE CHART */
+.s2{background:#F5F0EA;color:var(--charcoal);padding:36px 48px}
+.s2 .slide-label{color:var(--accent)}
+.s2-layout{display:grid;grid-template-columns:1fr 180px;gap:20px;flex:1;align-items:start;margin-top:4px}
+.chart-wrap{background:white;padding:14px;height:260px;position:relative}
+.kpi-col{display:flex;flex-direction:column;gap:8px}
+.kpi{background:white;padding:12px 14px}
+.kpi .kv{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--charcoal);line-height:1}
+.kpi .kv span{color:var(--gold)}
+.kpi .kl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:4px}
+
+/* SLIDE 3 — PRODUCT TABLE + DONUT */
+.s3{background:#0E0E0E;padding:36px 48px}
+.s3-layout{display:grid;grid-template-columns:1fr 200px;gap:20px;flex:1;align-items:start;margin-top:4px}
+.prod-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.prod-table th{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;font-weight:400;padding:7px 10px;border-bottom:1px solid #1a1a1a;text-align:left}
+.prod-table td{font-size:11px;padding:10px 10px;border-bottom:1px solid #111;color:#777;vertical-align:middle}
+.prod-table td.nm{color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:15px}
+.prod-table td.pr{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:15px}
+.prod-table td.st{color:var(--gold);font-size:12px;letter-spacing:1px}
+.donut-col{display:flex;flex-direction:column;gap:10px}
+.donut-wrap{height:160px;position:relative}
+.leg{display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:10px;color:#666}
+.leg-swatch{width:8px;height:8px;border-radius:1px;flex-shrink:0}
+
+/* SLIDE 4 — FINANCIALS + COMPETITIVE */
+.s4{background:#F5F0EA;color:var(--charcoal);padding:36px 48px}
+.s4 .slide-label{color:var(--accent)}
+.s4-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1;margin-top:4px;align-items:start}
+.fin-chart-wrap{background:white;padding:14px;height:240px;position:relative}
+.comp-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-top:4px}
+.comp-table th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#aaa;font-weight:400;padding:6px 8px;border-bottom:1px solid #e0dbd4;text-align:center}
+.comp-table th:first-child{text-align:left}
+.comp-table td{font-size:10px;padding:8px 8px;border-bottom:1px solid #ede9e3;text-align:center;color:#aaa}
+.comp-table td.bc{text-align:left;color:#888;font-size:11px}
+.comp-table tr.lum td{background:#fff}
+.comp-table tr.lum td.bc{color:var(--accent);font-weight:500}
+.dot5{color:#B89A6A;font-size:11px;letter-spacing:1px}
+.dot3{color:#C8B99A;font-size:11px;letter-spacing:1px}
+.dot2{color:#d0c8bc;font-size:11px;letter-spacing:1px}
+
+/* NAV */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;background:#050505;padding:10px 22px;border-top:1px solid #111}
+.nav-left{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#333}
+.nav-center{display:flex;gap:6px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:#1a1a1a;cursor:pointer;transition:all 0.3s;border:none;padding:0}
+.dot.active{background:var(--gold);width:22px;border-radius:3px}
+.nav-right{display:flex;gap:8px;align-items:center}
+.nav-btn{background:none;border:1px solid #222;color:#555;cursor:pointer;padding:5px 16px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-btn:disabled{opacity:0.2;cursor:default}
+.slide-counter{font-size:11px;color:#444;letter-spacing:1px;min-width:36px;text-align:center}
+</style>
+
+<h2 class="sr-only">Lumière luxury skincare — condensed 4-slide presentation with charts and tables</h2>
+
+<div class="pres">
+<div class="slides-wrapper">
+
+<!-- SLIDE 1: COVER -->
+<div class="slide s1 active">
+  <img class="s1-img" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=1200&q=80" alt="Luxury skincare on marble">
+  <div class="s1-content">
+    <div class="eyebrow">Brand Marketing Strategy 2025–2026</div>
+    <h1>Lumière</h1>
+    <div class="tagline">Where Science Meets Serenity</div>
+    <div class="gold-line"></div>
+    <div class="caption">Confidential · For internal use only</div>
+  </div>
+</div>
+
+<!-- SLIDE 2: MARKET OPPORTUNITY -->
+<div class="slide s2">
+  <div class="slide-label">Market Opportunity</div>
+  <div class="s2-layout">
+    <div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Global luxury skincare market size ($B)</div>
+      <div class="chart-wrap">
+        <canvas id="marketChart" role="img" aria-label="Line chart of luxury skincare market 2020 to 2026 growing from $98B to $189B">Market grows from $98B in 2020 to $189B in 2026.</canvas>
+      </div>
+    </div>
+    <div class="kpi-col">
+      <div class="kpi"><div class="kv"><span>$</span>189B</div><div class="kl">Market 2025</div></div>
+      <div class="kpi"><div class="kv">8.4<span>%</span></div><div class="kl">CAGR to 2030</div></div>
+      <div class="kpi"><div class="kv">2.3<span>×</span></div><div class="kl">vs mass market</div></div>
+      <div class="kpi"><div class="kv"><span>$</span>2.4B</div><div class="kl">Our niche</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: PRODUCTS + CHANNEL MIX -->
+<div class="slide s3">
+  <div class="slide-label">Product Architecture & Channel Mix</div>
+  <div class="s3-layout">
+    <table class="prod-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Product</th>
+          <th style="width:26%">Key ingredients</th>
+          <th style="width:8%">Size</th>
+          <th style="width:12%">Price</th>
+          <th style="width:14%">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="nm">L'Essence Sérum</td><td>Retinol 0.3%, Niacinamide 10%</td><td>30ml</td><td class="pr">$195</td><td class="st">★★★★★</td></tr>
+        <tr><td class="nm">Nuit Réparatrice</td><td>Retinol micro-enc., Ceramides</td><td>50ml</td><td class="pr">$240</td><td class="st">★★★★★</td></tr>
+        <tr><td class="nm">Brume Céleste</td><td>HA spheres, Rose water</td><td>100ml</td><td class="pr">$88</td><td class="st">★★★★☆</td></tr>
+        <tr><td class="nm">Huile Précieuse</td><td>Rosehip, Marula, Squalane</td><td>30ml</td><td class="pr">$165</td><td class="st">★★★★★</td></tr>
+        <tr><td class="nm">Masque Lumière</td><td>Kaolin, Vitamin C 15%, AHA</td><td>75ml</td><td class="pr">$120</td><td class="st">★★★★☆</td></tr>
+      </tbody>
+    </table>
+    <div class="donut-col">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">Budget split</div>
+      <div class="donut-wrap">
+        <canvas id="donutChart" role="img" aria-label="Donut chart: Paid Social 35%, Content 25%, KOL 20%, Email 12%, Other 8%">Paid Social 35%, Content 25%, KOL 20%, Email 12%, Other 8%.</canvas>
+      </div>
+      <div class="leg">
+        <div class="leg-item"><div class="leg-swatch" style="background:#B89A6A"></div>Paid Social — 35%</div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#8C7355"></div>Content / SEO — 25%</div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#D4B896"></div>KOL — 20%</div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#5A5651"></div>Email — 12%</div>
+        <div class="leg-item"><div class="leg-swatch" style="background:#2a2a2a"></div>Other — 8%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: FINANCIALS + COMPETITIVE -->
+<div class="slide s4">
+  <div class="slide-label">Financials & Competitive Position</div>
+  <div class="s4-layout">
+    <div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Revenue by channel ($M) — 3-year projection</div>
+      <div class="fin-chart-wrap">
+        <canvas id="revChart" role="img" aria-label="Stacked bar chart of revenue growing from $4.2M in Year 1 to $14.8M in Year 3">Revenue: Year 1 $4.2M, Year 2 $9.1M, Year 3 $14.8M.</canvas>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:10px">
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:#888"><span style="width:8px;height:8px;border-radius:1px;background:#B89A6A"></span>DTC</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:#888"><span style="width:8px;height:8px;border-radius:1px;background:#8C7355"></span>Retail</div>
+        <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:#888"><span style="width:8px;height:8px;border-radius:1px;background:#5A5651"></span>Wholesale</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:10px">Competitive landscape</div>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th style="width:30%;text-align:left">Brand</th>
+            <th>Clinical</th>
+            <th>Clean</th>
+            <th>Luxury</th>
+            <th>Sustain.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="lum"><td class="bc">✦ Lumière</td><td><span class="dot5">●●●●●</span></td><td><span class="dot5">●●●●●</span></td><td><span class="dot5">●●●●●</span></td><td><span class="dot5">●●●●●</span></td></tr>
+          <tr><td class="bc">La Mer</td><td><span class="dot2">●●●○○</span></td><td><span class="dot2">●●○○○</span></td><td><span class="dot5">●●●●●</span></td><td><span class="dot2">●●○○○</span></td></tr>
+          <tr><td class="bc">SkinCeuticals</td><td><span class="dot5">●●●●●</span></td><td><span class="dot3">●●●○○</span></td><td><span class="dot2">●●○○○</span></td><td><span class="dot3">●●●○○</span></td></tr>
+          <tr><td class="bc">Aug. Bader</td><td><span class="dot3">●●●●○</span></td><td><span class="dot3">●●●○○</span></td><td><span class="dot3">●●●●○</span></td><td><span class="dot2">●●○○○</span></td></tr>
+          <tr><td class="bc">Tatcha</td><td><span class="dot2">●●○○○</span></td><td><span class="dot3">●●●●○</span></td><td><span class="dot3">●●●●○</span></td><td><span class="dot3">●●●○○</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <div class="nav-left">Lumière · Confidential</div>
+  <div class="nav-center" id="dots"></div>
+  <div class="nav-right">
+    <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+    <span class="slide-counter" id="counter">1 / 4</span>
+    <button class="nav-btn" id="nextBtn">Next →</button>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const total = 4;
+let cur = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+let built = {};
+
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Slide ' + (i+1));
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  document.querySelectorAll('.dot')[cur].classList.remove('active');
+  cur = n;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('active');
+  prevBtn.disabled = cur === 0;
+  nextBtn.disabled = cur === total - 1;
+  counter.textContent = (cur + 1) + ' / ' + total;
+  if (!built[n]) { built[n] = true; buildChart(n); }
+}
+
+prevBtn.onclick = () => { if (cur > 0) goTo(cur - 1); };
+nextBtn.onclick = () => { if (cur < total - 1) goTo(cur + 1); };
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' && cur < total - 1) goTo(cur + 1);
+  if (e.key === 'ArrowLeft' && cur > 0) goTo(cur - 1);
+});
+
+function buildChart(n) {
+  if (n === 1) {
+    new Chart(document.getElementById('marketChart'), {
+      type: 'line',
+      data: {
+        labels: ['2020','2021','2022','2023','2024','2025','2026'],
+        datasets: [
+          { label: 'Luxury', data: [98,106,118,132,151,172,189], borderColor: '#B89A6A', backgroundColor: 'rgba(184,154,106,0.08)', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#B89A6A', tension: 0.4, fill: true },
+          { label: 'Mass', data: [210,218,226,235,245,256,268], borderColor: '#ccc', backgroundColor: 'rgba(0,0,0,0)', borderWidth: 1.5, pointRadius: 3, pointBackgroundColor: '#ccc', tension: 0.4, borderDash: [4,4] }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#fff', titleColor: '#1C1C1C', bodyColor: '#5A5651', borderColor: '#E8E3DC', borderWidth: 1 } },
+        scales: {
+          x: { grid: { color: '#f0ede7' }, ticks: { color: '#8C7355', font: { size: 10 } } },
+          y: { grid: { color: '#f0ede7' }, ticks: { color: '#8C7355', font: { size: 10 }, callback: v => '$' + v + 'B' }, beginAtZero: false }
+        }
+      }
+    });
+  }
+  if (n === 2) {
+    new Chart(document.getElementById('donutChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Paid Social','Content/SEO','KOL','Email','Other'],
+        datasets: [{ data: [35,25,20,12,8], backgroundColor: ['#B89A6A','#8C7355','#D4B896','#5A5651','#2a2a2a'], borderWidth: 0, hoverOffset: 4 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '68%',
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#111', titleColor: '#B89A6A', bodyColor: '#888', callbacks: { label: c => ' ' + c.label + ': ' + c.raw + '%' } } }
+      }
+    });
+  }
+  if (n === 3) {
+    new Chart(document.getElementById('revChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Year 1','Year 2','Year 3'],
+        datasets: [
+          { label: 'DTC', data: [3.0,6.2,9.8], backgroundColor: '#B89A6A' },
+          { label: 'Retail', data: [0.9,2.1,3.6], backgroundColor: '#8C7355' },
+          { label: 'Wholesale', data: [0.3,0.8,1.4], backgroundColor: '#5A5651' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#fff', titleColor: '#1C1C1C', bodyColor: '#5A5651', borderColor: '#E8E3DC', borderWidth: 1, callbacks: { label: c => ' ' + c.dataset.label + ': $' + c.raw.toFixed(1) + 'M' } } },
+        scales: {
+          x: { stacked: true, grid: { color: '#f0ede7' }, ticks: { color: '#8C7355', font: { size: 11 } } },
+          y: { stacked: true, grid: { color: '#f0ede7' }, ticks: { color: '#8C7355', font: { size: 11 }, callback: v => '$' + v + 'M' } }
+        }
+      }
+    });
+  }
+}
+</script>
