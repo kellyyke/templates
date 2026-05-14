@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colored Grid Cells</title>
+<style>
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 240px);
+    grid-template-rows: repeat(3, 240px);
+    gap: 16px;
+  }
+  .cell {
+    border-radius: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="cell" style="background-color: #ff6b6b;"></div>
+  <div class="cell" style="background-color: #feca57;"></div>
+  <div class="cell" style="background-color: #48dbfb;"></div>
+  <div class="cell" style="background-color: #ff9ff3;"></div>
+  <div class="cell" style="background-color: #54a0ff;"></div>
+  <div class="cell" style="background-color: #5f27cd;"></div>
+  <div class="cell" style="background-color: #01a3a4;"></div>
+  <div class="cell" style="background-color: #f368e0;"></div>
+  <div class="cell" style="background-color: #ee5a24;"></div>
+</div>
+</body>
+</html>

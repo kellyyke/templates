@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid with Text Cards</title>
+<style>
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #2d3436;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 320px);
+    grid-template-rows: repeat(2, 260px);
+    gap: 20px;
+  }
+  .card {
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: sans-serif;
+  }
+  .card h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #fff;
+  }
+  .card p {
+    margin: 0;
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="card" style="background-color: #6c5ce7;">
+    <h2>Design</h2>
+    <p>Create beautiful layouts with intuitive tools and smart templates.</p>
+  </div>
+  <div class="card" style="background-color: #00b894;">
+    <h2>Collaborate</h2>
+    <p>Work together in real-time with your team from anywhere in the world.</p>
+  </div>
+  <div class="card" style="background-color: #fd79a8;">
+    <h2>Share</h2>
+    <p>Publish and distribute your creations across every platform instantly.</p>
+  </div>
+  <div class="card" style="background-color: #0984e3;">
+    <h2>Analyze</h2>
+    <p>Track engagement and measure the impact of your visual content.</p>
+  </div>
+  <div class="card" style="background-color: #e17055;">
+    <h2>Automate</h2>
+    <p>Set up workflows that resize, format, and schedule your designs.</p>
+  </div>
+  <div class="card" style="background-color: #00cec9;">
+    <h2>Integrate</h2>
+    <p>Connect with your favorite apps and bring content into one place.</p>
+  </div>
+</div>
+</body>
+</html>

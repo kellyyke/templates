@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grid with Spanning Cells</title>
+<style>
+  body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: #16213e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 180px);
+    grid-template-rows: repeat(3, 160px);
+    gap: 12px;
+  }
+  .cell {
+    border-radius: 8px;
+  }
+  .span-2-col { grid-column: span 2; }
+  .span-3-col { grid-column: span 3; }
+  .span-2-row { grid-row: span 2; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <!-- Row 1: one cell spans 2 columns, then 2 normal cells -->
+  <div class="cell span-2-col" style="background-color: #e74c3c;"></div>
+  <div class="cell" style="background-color: #3498db;"></div>
+  <div class="cell" style="background-color: #2ecc71;"></div>
+  <!-- Row 2-3: one cell spans 2 rows, then others fill -->
+  <div class="cell span-2-row" style="background-color: #9b59b6;"></div>
+  <div class="cell" style="background-color: #f39c12;"></div>
+  <div class="cell span-2-col" style="background-color: #1abc9c;"></div>
+  <!-- Remaining row 3 cells -->
+  <div class="cell span-3-col" style="background-color: #e67e22;"></div>
+</div>
+</body>
+</html>
