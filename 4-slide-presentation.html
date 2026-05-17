@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Horizon — Q3 Product Review</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Arimo', sans-serif; background: #111; }
+  .slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; margin: 0 auto 40px; }
+
+  /* ===== SLIDE 1: COVER ===== */
+  .s1 {
+    background: linear-gradient(135deg, #2A0E5C 0%, #5B19C9 50%, #8B3DFF 100%);
+    display: flex; align-items: center; padding: 0 120px;
+  }
+  .s1 .grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .s1 .orb {
+    position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+  }
+  .s1 .orb-1 { width: 600px; height: 600px; background: #8B3DFF; top: -200px; right: -100px; }
+  .s1 .orb-2 { width: 400px; height: 400px; background: #00C4CC; bottom: -150px; left: 200px; }
+  .s1 .topbar {
+    position: absolute; top: 48px; left: 120px; right: 120px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 1px;
+  }
+  .s1 .logo { display: flex; align-items: center; gap: 12px; }
+  .s1 .logo svg { width: 32px; height: 32px; }
+  .s1 .logo span { font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: 3px; }
+  .s1 .content { position: relative; z-index: 1; max-width: 1100px; }
+  .s1 .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #00C4CC; margin-bottom: 32px; }
+  .s1 h1 { font-size: 88px; font-weight: 700; color: #ffffff; line-height: 1.08; }
+  .s1 h1 .accent { color: #00C4CC; }
+  .s1 .lede { font-size: 24px; color: rgba(255,255,255,0.7); margin-top: 32px; line-height: 1.6; max-width: 800px; }
+  .s1 .meta-row {
+    position: absolute; bottom: 80px; left: 120px; right: 120px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .s1 .meta-row .label { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .s1 .meta-row .who { font-size: 18px; color: rgba(255,255,255,0.8); }
+  .s1 .meta-row .date { font-size: 16px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .s1 .quarter { text-align: right; }
+  .s1 .quarter .yr { font-size: 14px; color: rgba(255,255,255,0.4); letter-spacing: 2px; display: block; }
+  .s1 .quarter .q { font-size: 64px; font-weight: 700; color: rgba(255,255,255,0.15); line-height: 1; }
+
+  /* ===== SLIDE 2: KPI ===== */
+  .s2 { background: #ffffff; padding: 80px 120px; display: flex; flex-direction: column; }
+  .s2 .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 60px; }
+  .s2 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #8B3DFF; margin-bottom: 8px; }
+  .s2 .section-title { font-size: 40px; font-weight: 700; color: #1a1a2e; }
+  .s2 .pill { background: #F1EBFF; color: #8B3DFF; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px; }
+  .s2 .pill .ind { width: 8px; height: 8px; border-radius: 50%; background: #38a169; }
+  .s2 .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; flex: 1; align-content: center; }
+  .s2 .kpi { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; }
+  .s2 .kpi.featured { background: #F1EBFF; border-color: #D6C2FF; }
+  .s2 .kpi .badge { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #38a169; margin-bottom: 16px; }
+  .s2 .kpi .badge.down { color: #3d8bff; }
+  .s2 .kpi .badge svg { width: 16px; height: 16px; }
+  .s2 .kpi .spark { width: 100%; height: 36px; margin-bottom: 20px; }
+  .s2 .kpi .value { font-size: 52px; font-weight: 700; color: #1a1a2e; }
+  .s2 .kpi .unit { font-size: 32px; color: #8B3DFF; }
+  .s2 .kpi .kpi-label { font-size: 16px; color: #718096; margin-top: 8px; }
+  .s2 .kpi .compare { font-size: 13px; color: #a0aec0; margin-top: 12px; }
+  .s2 .footer-strip {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid #e9ecef; margin-top: auto;
+    font-size: 13px; color: #a0aec0;
+  }
+  .s2 .footer-strip .logo { display: flex; align-items: center; gap: 8px; }
+  .s2 .footer-strip .logo svg { width: 20px; height: 20px; }
+  .s2 .footer-strip .logo span { font-weight: 700; color: #718096; letter-spacing: 2px; font-size: 12px; }
+
+  /* ===== SLIDE 3: TABLE + CHART ===== */
+  .s3 { background: #1a1a2e; color: #ffffff; padding: 80px 120px; display: flex; flex-direction: column; }
+  .s3 .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+  .s3 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #8B3DFF; margin-bottom: 8px; }
+  .s3 .section-title { font-size: 40px; font-weight: 700; color: #ffffff; }
+  .s3 .pill { background: rgba(139,61,255,0.15); color: #BC97FC; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px; }
+  .s3 .pill .ind { width: 8px; height: 8px; border-radius: 50%; background: #8B3DFF; }
+  .s3 .s3-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; flex: 1; }
+  .s3 .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 32px; }
+  .s3 .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .s3 .card-head h3 { font-size: 18px; font-weight: 700; color: #ffffff; }
+  .s3 .card-head .meta { font-size: 13px; color: #718096; }
+  .s3 .s3-table { width: 100%; border-collapse: collapse; }
+  .s3 .s3-table th { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #718096; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+  .s3 .s3-table th.num { text-align: right; }
+  .s3 .s3-table td { font-size: 15px; padding: 16px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; }
+  .s3 .s3-table td.num { text-align: right; }
+  .s3 .s3-table td.product { font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 10px; }
+  .s3 .s3-table .swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .s3 .s3-table td.growth { color: #38a169; font-weight: 700; text-align: right; }
+  .s3 .s3-table td.users { color: #a0aec0; text-align: right; }
+  .s3 .bar-wrap { display: flex; gap: 12px; height: 340px; }
+  .s3 .y-axis { display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; color: #718096; padding: 8px 0; width: 48px; flex-shrink: 0; }
+  .s3 .plot { display: flex; gap: 12px; flex: 1; align-items: flex-end; height: 100%; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .s3 .col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .s3 .col .v { font-size: 12px; color: #a0aec0; margin-bottom: 8px; font-weight: 700; }
+  .s3 .col .bar { width: 100%; background: #7630D7; border-radius: 6px 6px 0 0; min-height: 4px; }
+  .s3 .col.current .bar { background: #8B3DFF; }
+  .s3 .x-axis { display: flex; justify-content: space-around; font-size: 12px; color: #718096; margin-top: 12px; }
+  .s3 .legend { display: flex; gap: 20px; margin-top: 16px; font-size: 12px; color: #a0aec0; }
+  .s3 .legend .sq { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 6px; }
+  .s3 .footer-strip {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); margin-top: auto;
+    font-size: 13px; color: #718096;
+  }
+  .s3 .footer-strip .logo { display: flex; align-items: center; gap: 8px; }
+  .s3 .footer-strip .logo svg { width: 20px; height: 20px; }
+  .s3 .footer-strip .logo span { font-weight: 700; color: #a0aec0; letter-spacing: 2px; font-size: 12px; }
+
+  /* ===== SLIDE 4: TEAM ===== */
+  .s4 { background: #ffffff; padding: 80px 120px; display: flex; flex-direction: column; }
+  .s4 .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 50px; }
+  .s4 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #8B3DFF; margin-bottom: 8px; }
+  .s4 .section-title { font-size: 40px; font-weight: 700; color: #1a1a2e; }
+  .s4 .pill { background: #F1EBFF; color: #8B3DFF; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px; }
+  .s4 .pill .ind { width: 8px; height: 8px; border-radius: 50%; background: #8B3DFF; }
+  .s4 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; flex: 1; align-content: start; }
+  .s4 .team { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 16px; padding: 28px; }
+  .s4 .team .who { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .s4 .team-avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+  .s4 .team .name { font-size: 17px; font-weight: 700; color: #1a1a2e; }
+  .s4 .team .role { font-size: 13px; color: #8B3DFF; margin-top: 2px; }
+  .s4 .team .desc { font-size: 14px; color: #718096; line-height: 1.5; }
+  .s4 .cta-row {
+    margin-top: auto; display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, #2A0E5C, #5B19C9); border-radius: 16px; padding: 32px 40px;
+  }
+  .s4 .cta-text .t1 { font-size: 22px; font-weight: 700; color: #ffffff; display: block; }
+  .s4 .cta-text .t2 { font-size: 14px; color: rgba(255,255,255,0.6); margin-top: 6px; display: block; }
+  .s4 .cta-btn {
+    background: #ffffff; color: #5B19C9; font-size: 16px; font-weight: 700;
+    padding: 14px 32px; border-radius: 8px; display: flex; align-items: center; gap: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide s1">
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="topbar">
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="#8B3DFF"/>
+        <circle cx="16" cy="16" r="4" fill="#ffffff"/>
+      </svg>
+      <span>HORIZON</span>
+    </div>
+    <span>Internal &amp; Confidential</span>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow">Quarterly Product Review</div>
+    <h1>A record quarter,<br>built by the team —<br><span class="accent">2.4M new users.</span></h1>
+    <p class="lede">Revenue up 28% to $18.7M. Retention through the funnel held at 94%. Here's what shipped, what moved, and what's next.</p>
+  </div>
+
+  <div class="meta-row">
+    <div>
+      <span class="label">Presented by</span>
+      <div class="who">Sarah Park · Head of Product</div>
+      <div class="date">September 24, 2025 · All-hands</div>
+    </div>
+    <div class="quarter">
+      <span class="yr">FY25</span>
+      <span class="q">Q3</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 2: KPI -->
+<div class="slide s2">
+  <div class="header-row">
+    <div>
+      <div class="eyebrow">Key metrics</div>
+      <h2 class="section-title">Performance at a glance</h2>
+    </div>
+    <span class="pill"><span class="ind"></span>All targets exceeded</span>
+  </div>
+
+  <div class="kpi-grid">
+
+    <div class="kpi featured">
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 14 12 8 18 14"/></svg>
+        +34% vs Q2
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="spark" viewBox="0 0 100 36" preserveAspectRatio="none">
+        <polyline points="2,28 18,24 32,20 48,16 64,12 80,7 98,3" fill="none" stroke="#8B3DFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="value">2.4<span class="unit">M</span></div>
+      <div class="kpi-label">New users</div>
+      <div class="compare">1.8M in Q2 · target 2.0M</div>
+    </div>
+
+    <div class="kpi">
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 14 12 8 18 14"/></svg>
+        +28% vs Q2
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="spark" viewBox="0 0 100 36" preserveAspectRatio="none">
+        <polyline points="2,26 18,22 32,22 48,18 64,14 80,9 98,5" fill="none" stroke="#718096" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="value"><span class="unit">$</span>18.7<span class="unit">M</span></div>
+      <div class="kpi-label">Revenue</div>
+      <div class="compare">$14.6M in Q2 · target $16M</div>
+    </div>
+
+    <div class="kpi">
+      <span class="badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 14 12 8 18 14"/></svg>
+        +6pp vs Q2
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="spark" viewBox="0 0 100 36" preserveAspectRatio="none">
+        <polyline points="2,22 18,20 32,17 48,15 64,12 80,9 98,6" fill="none" stroke="#718096" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="value">94<span class="unit">%</span></div>
+      <div class="kpi-label">30-day retention</div>
+      <div class="compare">88% in Q2 · target 90%</div>
+    </div>
+
+    <div class="kpi">
+      <span class="badge down">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 10 12 16 18 10"/></svg>
+        −40% vs Q2
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="spark" viewBox="0 0 100 36" preserveAspectRatio="none">
+        <polyline points="2,8 18,12 32,16 48,18 64,22 80,26 98,30" fill="none" stroke="#3d8bff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="value">1.2<span class="unit">s</span></div>
+      <div class="kpi-label">Avg load time</div>
+      <div class="compare">2.0s in Q2 · target 1.5s</div>
+    </div>
+
+  </div>
+
+  <div class="footer-strip">
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#718096" stroke-width="2"/>
+        <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="#8B3DFF"/>
+        <circle cx="16" cy="16" r="4" fill="#718096"/>
+      </svg>
+      <span>HORIZON</span>
+    </div>
+    <span>All figures vs Q2 FY25 · Retention measured at 30 days</span>
+  </div>
+</div>
+
+
+<!-- SLIDE 3: TABLE + CHART -->
+<div class="slide s3">
+  <div class="header-row">
+    <div>
+      <div class="eyebrow">Revenue breakdown</div>
+      <h2 class="section-title">Performance by product line</h2>
+    </div>
+    <span class="pill"><span class="ind"></span>$18.7M total Q3 revenue</span>
+  </div>
+
+  <div class="s3-layout">
+
+    <div class="card">
+      <div class="card-head">
+        <h3>By product line</h3>
+        <span class="meta">Q3 FY25</span>
+      </div>
+      <table class="s3-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th class="num">Revenue</th>
+            <th class="num">Growth</th>
+            <th class="num">Users</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="product"><span class="swatch" style="background: #7630D7;"></span>Platform Core</td>
+            <td class="num">$8.2M</td>
+            <td class="num growth">+31%</td>
+            <td class="num users">1.1M</td>
+          </tr>
+          <tr>
+            <td class="product"><span class="swatch" style="background: #A370FC;"></span>Analytics Suite</td>
+            <td class="num">$4.8M</td>
+            <td class="num growth">+45%</td>
+            <td class="num users">680K</td>
+          </tr>
+          <tr>
+            <td class="product"><span class="swatch" style="background: #00C4CC;"></span>Integrations</td>
+            <td class="num">$3.1M</td>
+            <td class="num growth">+22%</td>
+            <td class="num users">420K</td>
+          </tr>
+          <tr>
+            <td class="product"><span class="swatch" style="background: #718096;"></span>Enterprise</td>
+            <td class="num">$2.6M</td>
+            <td class="num growth">+18%</td>
+            <td class="num users">89K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Quarterly revenue trend</h3>
+        <span class="meta">USD, millions</span>
+      </div>
+      <div class="bar-wrap">
+        <div class="y-axis">
+          <span>$20M</span>
+          <span>$15M</span>
+          <span>$10M</span>
+          <span>$5M</span>
+          <span>$0</span>
+        </div>
+        <div class="plot">
+          <div class="col"><span class="v">$9.2</span><div class="bar" style="height: 46%;"></div></div>
+          <div class="col"><span class="v">$12.4</span><div class="bar" style="height: 62%;"></div></div>
+          <div class="col"><span class="v">$14.6</span><div class="bar" style="height: 73%;"></div></div>
+          <div class="col current"><span class="v">$18.7</span><div class="bar" style="height: 93%;"></div></div>
+        </div>
+      </div>
+      <div class="x-axis">
+        <span>Q4 FY24</span>
+        <span>Q1 FY25</span>
+        <span>Q2 FY25</span>
+        <span>Q3 FY25</span>
+      </div>
+      <div class="legend">
+        <span><span class="sq" style="background: #8B3DFF;"></span>Q3 — current quarter</span>
+        <span><span class="sq" style="background: #7630D7;"></span>Trailing quarters</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-strip">
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20">
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#a0aec0" stroke-width="2"/>
+        <path d="M8 16 L16 8 L24 16 L16 24 Z" fill="#8B3DFF"/>
+        <circle cx="16" cy="16" r="4" fill="#a0aec0"/>
+      </svg>
+      <span>HORIZON</span>
+    </div>
+    <span>Source: Finance close, Sept 22 · All figures unaudited</span>
+  </div>
+</div>
+
+
+<!-- SLIDE 4: TEAM + CTA -->
+<div class="slide s4">
+  <div class="header-row">
+    <div>
+      <div class="eyebrow">Leadership</div>
+      <h2 class="section-title">The team behind Q3</h2>
+    </div>
+    <span class="pill"><span class="ind"></span>Six leaders · four functions</span>
+  </div>
+
+  <div class="team-grid">
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=128&q=80" alt="Alex Chen">
+        <div>
+          <div class="name">Alex Chen</div>
+          <div class="role">VP Engineering</div>
+        </div>
+      </div>
+      <div class="desc">Lifted platform reliability from 99.5% to 99.97% uptime.</div>
+    </div>
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=128&q=80" alt="Sarah Park">
+        <div>
+          <div class="name">Sarah Park</div>
+          <div class="role">Head of Product</div>
+        </div>
+      </div>
+      <div class="desc">Shipped Analytics Suite v2 and three key integrations.</div>
+    </div>
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&q=80" alt="Marcus Johnson">
+        <div>
+          <div class="name">Marcus Johnson</div>
+          <div class="role">Head of Growth</div>
+        </div>
+      </div>
+      <div class="desc">Drove 2.4M new signups via the referral program redesign.</div>
+    </div>
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&q=80" alt="Priya Sharma">
+        <div>
+          <div class="name">Priya Sharma</div>
+          <div class="role">VP Design</div>
+        </div>
+      </div>
+      <div class="desc">Redesigned onboarding, cutting drop-off by 40%.</div>
+    </div>
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&q=80" alt="James Wu">
+        <div>
+          <div class="name">James Wu</div>
+          <div class="role">CTO</div>
+        </div>
+      </div>
+      <div class="desc">Architected the multi-region expansion into APAC.</div>
+    </div>
+
+    <div class="team">
+      <div class="who">
+        <img class="team-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=128&q=80" alt="Olivia Torres">
+        <div>
+          <div class="name">Olivia Torres</div>
+          <div class="role">Head of Sales</div>
+        </div>
+      </div>
+      <div class="desc">Closed 12 enterprise deals worth $2.6M combined.</div>
+    </div>
+
+  </div>
+
+  <div class="cta-row">
+    <div class="cta-text">
+      <span class="t1">Read the full Q3 report</span>
+      <span class="t2">Charts, breakdowns, and the Q4 plan — updated weekly on the internal wiki.</span>
+    </div>
+    <span class="cta-btn">
+      Open report
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </span>
+  </div>
+</div>
+
+</body>
+</html>
